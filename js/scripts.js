@@ -1,20 +1,18 @@
-function palindromeCheck(word) {
-  let wordCharacters = word.split("");
-  for (var index = 0; index < wordCharacters.length; index += 1){
-    if(wordCharacters[index] === " ") {
-      wordCharacters.splice(index, 1);
+function palindrome(string) {
+  var stringLower = string.toLowerCase();
+  var arrayLower = stringLower.split("");
+  var length = arrayLower.length;
+  for(var i = 0; i < length; i += 1) {
+    if (arrayLower[i] === " ") {
+      arrayLower.splice(i,1);
     }
-    var reverseWordCharacters = wordCharacters.slice();
-    reverseWordCharacters.reverse();
-    var reverseWordCharactersString = reverseWordCharacters.toString();
-    var wordCharactersString = wordCharacters.toString();
-    if (wordCharactersString.toUpperCase() === reverseWordCharactersString.toUpperCase()) {
-      return true;
-    } else {
-      return false;
-    }
-    console.log(reverseWordCharactersString);
-    console.log(wordCharactersString);
+  }
+  var stringForward = arrayLower.slice().join("");
+  var stringReverse = arrayLower.reverse().join("");
+  if (stringForward === stringReverse) {
+    return true;
+  } else {
+    return false;
   }
 }
 
@@ -23,50 +21,15 @@ $(document).ready(function(){
 
     event.preventDefault();
 
-    var possiblePalindrome = $("input#wordinput").val();
+    var word = $("input#wordinput").val();
 
-    var characters = possiblePalindrome.split("");
+    var result = palindrome(word);
 
-    for(var index = 0; index < characters.length; index += 1) {
-      if (characters[index] === " ") {
-        characters.splice(index, 1);
-      }
-    }
-
-    console.log(possiblePalindrome);
-
-    console.log(characters);
-
-    var reverseCharacters = characters.slice();
-
-    reverseCharacters.reverse();
-
-    console.log(reverseCharacters);
-
-    var wordBackward = reverseCharacters.toString();
-
-    var wordForward = characters.toString();
-
-    console.log(wordBackward);
-
-    console.log(wordForward);
-
-    var wordForwardUpperCase = wordForward.toUpperCase();
-
-    var wordBackwardUpperCase = wordBackward.toUpperCase();
-
-    console.log(wordForwardUpperCase);
-
-    console.log(wordBackwardUpperCase);
-
-    if (wordForwardUpperCase === wordBackwardUpperCase) {
-      var result = " a palindrome.";
+    if (!result) {
+      $("#answer").text("not ");
     } else {
-      var result = " not a palindrome.";
+      $("#answer").text("");
     }
-
-
-    $("#answer").text(result);
 
 
     $(".result").show();
